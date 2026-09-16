@@ -1,0 +1,123 @@
+<div class="st-page">
+
+  <!-- ─── Hero ──────────────────────────────────────────────────────────── -->
+
+  <div class="st-hero">
+    <div class="st-hero__noise"></div>
+
+    <div class="st-hero__inner">
+
+      <!-- Icon -->
+      <div class="st-icon-wrap">
+        <i class="ri-speed-up-fill st-icon"></i>
+      </div>
+
+      <!-- Label -->
+      <p class="st-label">
+        @if (error()) {
+          {{ lang() === 'en' ? 'Something went wrong' : 'Une erreur est survenue' }}
+        } @else if (phaseLabel()) {
+          {{ phaseLabel() }}
+        } @else {
+          {{ lang() === 'en' ? 'Discover your connection speed' : 'Découvrez la vitesse de votre connexion' }}
+        }
+      </p>
+
+      <!-- Start / Stop button -->
+      <button class="st-start-btn" type="button" [class.st-start-btn--running]="running()" (click)="toggleTest()">
+        <i [class]="running() ? 'ri-stop-fill' : 'ri-play-fill'"></i>
+        {{ running()
+          ? (lang() === 'en' ? 'Stop' : 'Arrêter')
+          : (lang() === 'en' ? 'Start test' : 'Lancer le test') }}
+      </button>
+
+      <!-- Subtitle -->
+      <p class="st-sub">
+        @if (error()) {
+          {{ lang() === 'en'
+            ? 'The speed test could not complete. Please try again later.'
+            : 'Le test de débit n\'a pas pu aboutir. Réessayez plus tard.' }}
+        } @else {
+          {{ lang() === 'en'
+            ? 'Measure your download and upload speed, ping and jitter, on the Tyrolium / SolidServ infrastructure.'
+            : 'Mesurez votre débit descendant, votre débit montant, le ping et la gigue, sur l\'infrastructure Tyrolium / SolidServ.' }}
+        }
+      </p>
+
+      <!-- Links -->
+      <div class="st-links">
+        <a href="https://tyrolium.fr" class="st-btn">
+          <i class="ri-home-line"></i>
+          Tyrolium
+        </a>
+        <a href="https://ip.tyrolium.fr" class="st-btn">
+          <i class="ri-map-pin-user-line"></i>
+          {{ lang() === 'en' ? 'My IP' : 'Mon IP' }}
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Wave -->
+    <div class="st-hero__wave">
+      <svg viewBox="0 24 150 28" preserveAspectRatio="none">
+        <defs><path id="stw" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"/></defs>
+        <use href="#stw" x="48" y="0" fill="rgba(246,247,251,0.5)"/>
+        <use href="#stw" x="48" y="3" fill="rgba(246,247,251,0.35)"/>
+        <use href="#stw" x="48" y="7" fill="#f6f7fb"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ─── Body ──────────────────────────────────────────────────────────── -->
+
+  <div class="st-body">
+    <div class="st-container">
+
+      <!-- Results grid -->
+      <div class="st-results">
+        <div class="st-result-card">
+          <div class="st-result-card__icon"><i class="ri-download-cloud-2-line"></i></div>
+          <span class="st-result-card__value">{{ download() || '—' }}</span>
+          <span class="st-result-card__unit">{{ download() ? 'Mbps' : '' }}</span>
+          <span class="st-result-card__label">{{ lang() === 'en' ? 'Download' : 'Débit descendant' }}</span>
+        </div>
+        <div class="st-result-card">
+          <div class="st-result-card__icon"><i class="ri-upload-cloud-2-line"></i></div>
+          <span class="st-result-card__value">{{ upload() || '—' }}</span>
+          <span class="st-result-card__unit">{{ upload() ? 'Mbps' : '' }}</span>
+          <span class="st-result-card__label">{{ lang() === 'en' ? 'Upload' : 'Débit montant' }}</span>
+        </div>
+        <div class="st-result-card">
+          <div class="st-result-card__icon"><i class="ri-signal-tower-line"></i></div>
+          <span class="st-result-card__value">{{ ping() || '—' }}</span>
+          <span class="st-result-card__unit">{{ ping() ? 'ms' : '' }}</span>
+          <span class="st-result-card__label">Ping</span>
+        </div>
+        <div class="st-result-card">
+          <div class="st-result-card__icon"><i class="ri-pulse-line"></i></div>
+          <span class="st-result-card__value">{{ jitter() || '—' }}</span>
+          <span class="st-result-card__unit">{{ jitter() ? 'ms' : '' }}</span>
+          <span class="st-result-card__label">{{ lang() === 'en' ? 'Jitter' : 'Gigue' }}</span>
+        </div>
+      </div>
+
+      <!-- SolidServ Banner -->
+      <a href="https://solidserv.fr" target="_blank" rel="noopener" class="st-solidserv">
+        <div class="st-solidserv__left">
+          <img src="/assets/tyrolium-ui/projects/SolidServ.png" alt="SolidServ" class="st-solidserv__logo">
+          <div>
+            <span class="st-solidserv__title">{{ lang() === 'en' ? 'Need a server?' : 'Besoin d\'un serveur ?' }}</span>
+            <span class="st-solidserv__sub">{{ lang() === 'en' ? 'Rent a VPS or dedicated server via SolidServ - a Tyrolium subsidiary.' : 'Louez un VPS ou un serveur dédié via SolidServ - filiale de Tyrolium.' }}</span>
+          </div>
+        </div>
+        <span class="st-solidserv__cta">
+          {{ lang() === 'en' ? 'Discover SolidServ' : 'Découvrir SolidServ' }}
+          <i class="ri-arrow-right-line"></i>
+        </span>
+      </a>
+
+    </div>
+  </div>
+
+</div>
