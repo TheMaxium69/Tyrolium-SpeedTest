@@ -192,11 +192,85 @@
   padding: 0 2rem;
 }
 
-/* ─── Results grid ──────────────────────────────────────────────────────── */
+/* ─── Jauges Download / Upload ──────────────────────────────────────────── */
+
+.st-gauges {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.st-gauge-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--page-card-bg);
+  border: 1px solid var(--page-border);
+  border-radius: 16px;
+  padding: 1.25rem 1rem 1.5rem;
+  min-height: 180px;
+  justify-content: flex-start;
+}
+
+.st-gauge-card__label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--page-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+/* Jauge façon compteur de vitesse : arc "ouvert" en bas, balayage 240°.
+   Taille fixe (viewBox), et le chiffre est un <text> SVG dans le même
+   repère que l'arc - plus de superposition approximative entre deux
+   éléments HTML/SVG séparés. */
+.st-gauge {
+  width: 100%;
+  max-width: 220px;
+  height: auto;
+}
+
+.st-gauge__track {
+  fill: none;
+  stroke: var(--page-border);
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.st-gauge__fill {
+  fill: none;
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.st-gauge__fill--dl { stroke: #0000FF; }
+.st-gauge__fill--ul { stroke: #BF0000; }
+
+[data-theme="dark"] .st-gauge__fill--dl { stroke: #5b74ff; }
+[data-theme="dark"] .st-gauge__fill--ul { stroke: #ff5c5c; }
+
+.st-gauge__value {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  fill: var(--page-text);
+}
+
+.st-gauge__unit {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  fill: var(--page-text-muted);
+}
+
+/* ─── Ping / Gigue ──────────────────────────────────────────────────────── */
 
 .st-results {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   margin-bottom: 2rem;
 }
@@ -211,6 +285,8 @@
   border: 1px solid var(--page-border);
   border-radius: 16px;
   padding: 1.5rem 1rem;
+  min-height: 140px;
+  justify-content: center;
 }
 
 .st-result-card__icon {
@@ -236,6 +312,7 @@
   font-weight: 800;
   color: var(--page-text);
   line-height: 1;
+  white-space: nowrap;
 }
 
 .st-result-card__unit {
@@ -337,11 +414,16 @@
 }
 
 @media (max-width: 640px) {
-  .st-results { grid-template-columns: repeat(2, 1fr); }
+  /* En 2 colonnes les 4 cartes deviennent trop étroites sur mobile - on
+     passe tout en 1 colonne, chaque carte prend toute la largeur. */
+  .st-gauges, .st-results { grid-template-columns: 1fr; }
+  .st-gauge { max-width: 260px; }
 }
 
 @media (max-width: 480px) {
   .st-links { flex-direction: column; align-items: stretch; }
   .st-btn { justify-content: center; }
   .st-start-btn { width: 100%; justify-content: center; }
+
+  .st-result-card__value { font-size: 1.4rem; }
 }

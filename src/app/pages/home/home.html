@@ -74,30 +74,40 @@
   <div class="st-body">
     <div class="st-container">
 
-      <!-- Results grid -->
+      <!-- Jauges Download / Upload -->
+      <div class="st-gauges">
+        <div class="st-gauge-card">
+          <span class="st-gauge-card__label">{{ lang() === 'en' ? 'Download' : 'Débit descendant' }}</span>
+          <svg class="st-gauge" viewBox="0 0 200 145">
+            <path class="st-gauge__track" [attr.d]="gaugeTrackPath"></path>
+            <path class="st-gauge__fill st-gauge__fill--dl" [attr.d]="downloadArcPath()"></path>
+            <text class="st-gauge__value" x="100" y="90" text-anchor="middle" [attr.textLength]="downloadTextLength()" lengthAdjust="spacingAndGlyphs">{{ downloadDisplay() }}</text>
+            <text class="st-gauge__unit" x="100" y="115" text-anchor="middle">Mbps</text>
+          </svg>
+        </div>
+        <div class="st-gauge-card">
+          <span class="st-gauge-card__label">{{ lang() === 'en' ? 'Upload' : 'Débit montant' }}</span>
+          <svg class="st-gauge" viewBox="0 0 200 145">
+            <path class="st-gauge__track" [attr.d]="gaugeTrackPath"></path>
+            <path class="st-gauge__fill st-gauge__fill--ul" [attr.d]="uploadArcPath()"></path>
+            <text class="st-gauge__value" x="100" y="90" text-anchor="middle" [attr.textLength]="uploadTextLength()" lengthAdjust="spacingAndGlyphs">{{ uploadDisplay() }}</text>
+            <text class="st-gauge__unit" x="100" y="115" text-anchor="middle">Mbps</text>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Ping / Gigue -->
       <div class="st-results">
-        <div class="st-result-card">
-          <div class="st-result-card__icon"><i class="ri-download-cloud-2-line"></i></div>
-          <span class="st-result-card__value">{{ download() || '—' }}</span>
-          <span class="st-result-card__unit">{{ download() ? 'Mbps' : '' }}</span>
-          <span class="st-result-card__label">{{ lang() === 'en' ? 'Download' : 'Débit descendant' }}</span>
-        </div>
-        <div class="st-result-card">
-          <div class="st-result-card__icon"><i class="ri-upload-cloud-2-line"></i></div>
-          <span class="st-result-card__value">{{ upload() || '—' }}</span>
-          <span class="st-result-card__unit">{{ upload() ? 'Mbps' : '' }}</span>
-          <span class="st-result-card__label">{{ lang() === 'en' ? 'Upload' : 'Débit montant' }}</span>
-        </div>
         <div class="st-result-card">
           <div class="st-result-card__icon"><i class="ri-signal-tower-line"></i></div>
           <span class="st-result-card__value">{{ ping() || '—' }}</span>
-          <span class="st-result-card__unit">{{ ping() ? 'ms' : '' }}</span>
+          <span class="st-result-card__unit">ms</span>
           <span class="st-result-card__label">Ping</span>
         </div>
         <div class="st-result-card">
           <div class="st-result-card__icon"><i class="ri-pulse-line"></i></div>
           <span class="st-result-card__value">{{ jitter() || '—' }}</span>
-          <span class="st-result-card__unit">{{ jitter() ? 'ms' : '' }}</span>
+          <span class="st-result-card__unit">ms</span>
           <span class="st-result-card__label">{{ lang() === 'en' ? 'Jitter' : 'Gigue' }}</span>
         </div>
       </div>
