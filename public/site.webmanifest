@@ -1,7 +1,7 @@
 {
   "id": "/",
-  "name": "Speedtest",
-  "short_name": "Speedtest",
+  "name": "Tyrolium SpeedTest",
+  "short_name": "Tyrolium SpeedTest",
   "description": "Testez la vitesse de votre connexion internet gratuitement : débit descendant, débit montant, ping et gigue, sur l'infrastructure Tyrolium / SolidServ.",
   "lang": "fr",
   "dir": "ltr",
